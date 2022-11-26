@@ -1,0 +1,15 @@
+version: '3'
+services:
+  app:
+    image: goropikari/qmkfm:0.18.17
+    volumes:
+      - /dev:/dev  # for flash
+      - ../keyboards:/home/vscode/qmk_firmware/keyboards:cached
+      - ../build:/home/vscode/qmk_firmware/.build:cached
+      - ../.devcontainer/:/home/vscode/qmk_firmware/.devcontainer
+    privileged: true
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    command: /bin/sh -c "sleep infinity"
